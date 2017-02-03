@@ -1,11 +1,11 @@
-Swiscoin integration/staging tree
+Levelcoin integration/staging tree
 ================================
 
 http://www.swisopensource.com
 
 Copyright (c) 2009-2014 Bitcoin Developers
 Copyright (c) 2011-2014 Litecoin Developers
-Copyright (c) 2015-2017 Swiscoin Developers
+Copyright (c) 2015-2017 Levelcoin Developers
 
 Important News
 -----------------
@@ -13,10 +13,10 @@ We have fixed BlockChain fork Issue and Updated Protocol Version from 70002 to 7
 Difficulty algorithm changed to DGW.. 
 Changes take effect on Jan 25, 00:00:00 GMT.
 
-What is Swiscoin?
+What is Levelcoin?
 ----------------
 
-Swiscoin is a lite version of Bitcoin using scrypt as a proof-of-work algorithm.
+Levelcoin is a lite version of Bitcoin using scrypt as a proof-of-work algorithm.
  - 60 minutes block targets
  - subsidy halves in 840k blocks (~4 years)
  - ~3.1 billion total coins
@@ -25,12 +25,12 @@ Swiscoin is a lite version of Bitcoin using scrypt as a proof-of-work algorithm.
  - 10 blocks to retarget difficulty
 
 For more information, as well as an immediately useable, binary version of
-the Swiscoin client sofware, see http://www.swisopensource.com
+the Levelcoin client sofware, see http://www.swisopensource.com
 
 License
 -------
 
-Swiscoin is released under the terms of the MIT license. See `COPYING` for more
+Levelcoin is released under the terms of the MIT license. See `COPYING` for more
 information or see http://opensource.org/licenses/MIT.
 
 Development process
@@ -39,7 +39,7 @@ Development process
 Developers work in their own trees, then submit pull requests when they think
 their feature or bug fix is ready.
 
-If it is a simple/trivial/non-controversial change, then one of the Swiscoin
+If it is a simple/trivial/non-controversial change, then one of the Levelcoin
 development team members simply pulls it.
 
 If it is a *more complicated or potentially controversial* change, then the patch
@@ -72,5 +72,5 @@ Unit tests for the GUI code are in `src/qt/test/`. To compile and run them:
 
     qmake BITCOIN_QT_TEST=1 -o Makefile.test bitcoin-qt.pro
     make -f Makefile.test
-    ./swiscoin-qt_test
+    ./levelcoin-qt_test
 

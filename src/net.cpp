@@ -1093,7 +1093,7 @@ void ThreadMapPort()
             }
         }
 
-        string strDesc = "Swiscoin " + FormatFullVersion();
+        string strDesc = "Levelcoin " + FormatFullVersion();
 
         try {
             loop {
@@ -1173,14 +1173,8 @@ void MapPort(bool)
 // The first name is used as information source for addrman.
 // The second name should resolve to a list of seed addresses.
 static const char *strMainNetDNSSeed[][2] = {
-    {"217.175.119.126", "217.175.119.126"},
-    {"88.206.141.110", "88.206.141.110"},
-    {"78.66.83.88", "78.66.83.88"},
-    {"188.166.182.57", "188.166.182.57"},
-    {"198.38.93.185", "198.38.93.185"},
-    {"198.38.92.54", "198.38.92.54"},
-    {"178.62.87.94", "178.62.87.94"},
-    {"67.227.132.6", "67.227.132.6"},
+    {"54.200.158.196", "54.200.158.196"},
+    {"54.201.248.243", "54.201.248.243"},
     {NULL, NULL}
 };
 
@@ -1667,7 +1661,7 @@ bool BindListenPort(const CService &addrBind, string& strError)
     {
         int nErr = WSAGetLastError();
         if (nErr == WSAEADDRINUSE)
-            strError = strprintf(_("Unable to bind to %s on this computer. Swiscoin is probably already running."), addrBind.ToString().c_str());
+            strError = strprintf(_("Unable to bind to %s on this computer. Levelcoin is probably already running."), addrBind.ToString().c_str());
         else
             strError = strprintf(_("Unable to bind to %s on this computer (bind returned error %d, %s)"), addrBind.ToString().c_str(), nErr, strerror(nErr));
         printf("%s\n", strError.c_str());

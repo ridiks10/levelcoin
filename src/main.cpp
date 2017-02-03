@@ -19,7 +19,7 @@ using namespace std;
 using namespace boost;
 
 #if defined(NDEBUG)
-# error "Swiscoin cannot be compiled without assertions."
+# error "Levelcoin cannot be compiled without assertions."
 #endif
 
 //
@@ -35,8 +35,8 @@ CTxMemPool mempool;
 unsigned int nTransactionsUpdated = 0;
 
 map<uint256, CBlockIndex*> mapBlockIndex;
-uint256 hashGenesisBlock("0x8c0d74f0126f18dfc3e8651d6dd9da7c54beee28f84dbc1d3b8349fae64a2f8b");
-static CBigNum bnProofOfWorkLimit(~uint256(0) >> 20); // Swiscoin: starting difficulty is 1 / 2^12
+uint256 hashGenesisBlock("0x");
+static CBigNum bnProofOfWorkLimit(~uint256(0) >> 20); // Levelcoin: starting difficulty is 1 / 2^12
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
 uint256 nBestChainWork = 0;
@@ -68,7 +68,7 @@ map<uint256, set<uint256> > mapOrphanTransactionsByPrev;
 // Constant stuff for coinbase transactions we create:
 CScript COINBASE_FLAGS;
 
-const string strMessageMagic = "Swiscoin Signed Message:\n";
+const string strMessageMagic = "Levelcoin Signed Message:\n";
 
 double dHashesPerSec = 0.0;
 int64 nHPSTimerStart = 0;
@@ -362,7 +362,7 @@ unsigned int LimitOrphanTxSize(unsigned int nMaxOrphans)
 
 bool CTxOut::IsDust() const
 {
-    // Swiscoin: IsDust() detection disabled, allows any valid dust to be relayed.
+    // Levelcoin: IsDust() detection disabled, allows any valid dust to be relayed.
     // The fees imposed on each dust txo is considered sufficient spam deterrant. 
     return false;
 }
@@ -623,7 +623,7 @@ int64 CTransaction::GetMinFee(unsigned int nBlockSize, bool fAllowFree,
             nMinFee = 0;
     }
 
-    // Swiscoin
+    // Levelcoin
     // To limit dust spam, add nBaseFee for each output less than DUST_SOFT_LIMIT
     BOOST_FOREACH(const CTxOut& txout, vout)
         if (txout.nValue < DUST_SOFT_LIMIT)
@@ -1101,13 +1101,13 @@ int64 static GetBlockValue(int nHeight, int64 nFees)
 	nSubsidy = 12 * COIN;
     }    
     // Subsidy is cut in half every 840000 blocks, which will occur approximately every 4 years
-    nSubsidy >>= (nHeight / 840000); // Swiscoin: 840k blocks in ~4 years
+    nSubsidy >>= (nHeight / 840000); // Levelcoin: 840k blocks in ~4 years
 
     return nSubsidy + nFees;
 }
 
-static const int64 nTargetTimespan = 1 * 60 * 60; // Swiscoin: 1 Hours
-static const int64 nTargetSpacing = 1 * 120; // Swiscoin: 2 Minites
+static const int64 nTargetTimespan = 1 * 60 * 60; // Levelcoin: 1 Hours
+static const int64 nTargetSpacing = 1 * 120; // Levelcoin: 2 Minites
 static const int64 nInterval = nTargetTimespan / nTargetSpacing;
 
 //
@@ -1225,7 +1225,7 @@ unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBl
         return pindexLast->nBits;
     }
 
-    // Swiscoin: This fixes an issue where a 51% attack can change difficulty at will.
+    // Levelcoin: This fixes an issue where a 51% attack can change difficulty at will.
     // Go back the full period unless it's the first retarget after genesis. Code courtesy of Art Forz
     int blockstogoback = nInterval-1;
     if ((pindexLast->nHeight+1) != nInterval)
@@ -2172,7 +2172,7 @@ bool CBlock::CheckBlock(CValidationState &state, bool fCheckPOW, bool fCheckMerk
     if (vtx.empty() || vtx.size() > MAX_BLOCK_SIZE || ::GetSerializeSize(*this, SER_NETWORK, PROTOCOL_VERSION) > MAX_BLOCK_SIZE)
         return state.DoS(100, error("CheckBlock() : size limits failed"));
 
-    // Swiscoin: Special short-term limits to avoid 10,000 BDB lock limit:
+    // Levelcoin: Special short-term limits to avoid 10,000 BDB lock limit:
     if (GetBlockTime() < 1376568000)  // stop enforcing 15 August 2013 00:00:00
     {
         // Rule is: #unique txids referenced <= 4,500
@@ -2819,11 +2819,11 @@ bool LoadBlockIndex()
 {
     if (fTestNet)
     {
-        pchMessageStart[0] = 0xc1;
-        pchMessageStart[1] = 0xa2;
-        pchMessageStart[2] = 0xd7;
+        pchMessageStart[0] = 0xb6;
+        pchMessageStart[1] = 0xa1;
+        pchMessageStart[2] = 0xc4;
         pchMessageStart[3] = 0xdc;
-        hashGenesisBlock = uint256("0x8c0d74f0126f18dfc3e8651d6dd9da7c54beee28f84dbc1d3b8349fae64a2f8b");
+        hashGenesisBlock = uint256("0x");
     }
 
     //
@@ -2856,26 +2856,26 @@ bool InitBlockIndex() {
         //   vMerkleTree: 97ddfbbae6
 
         // Genesis block
-        const char* pszTimestamp = "1 Jan 2016 Start New Year of 2016";
+        const char* pszTimestamp = "1 Jan 2017 Start New Year of 2017";
         CTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 486604799 << CBigNum(4) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
         txNew.vout[0].nValue = 50 * COIN;
-        txNew.vout[0].scriptPubKey = CScript() << ParseHex("042384711fa689ad5023690c80f3a48c8f13f8d45b8c857fbcbc8bc4a8e4d3eb4b10f4d4604fa08dce601aaf0f470216fe1b51850b4acf21b179c45070ac7b03a9") << OP_CHECKSIG;
+        txNew.vout[0].scriptPubKey = CScript() << ParseHex("093484714fa689ad5023690c80f3a48c8f13f8d45b8c967fbcbc8bc4a8e4d3eb4b10f4d4604fa08dce601aaf0f470216fe1b51850b4acf21b179c45070ac7b03a9") << OP_CHECKSIG;
         CBlock block;
         block.vtx.push_back(txNew);
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
-        block.nTime    = 1451607044;
+        block.nTime    = 1486089556;
         block.nBits    = 0x1e0ffff0;
-        block.nNonce   = 238623;
+        block.nNonce   = 0;
 
         if (fTestNet)
         {
-            block.nTime    = 1451607044;
-            block.nNonce   = 238623;
+            block.nTime    = 1486089556;
+            block.nNonce   = 0;
         }
 
         //// debug print
@@ -2883,7 +2883,7 @@ bool InitBlockIndex() {
         printf("%s\n", hash.ToString().c_str());
         printf("%s\n", hashGenesisBlock.ToString().c_str());
         printf("%s\n", block.hashMerkleRoot.ToString().c_str());
-        assert(block.hashMerkleRoot == uint256("0xee59ea50306f010f6a78b8e68db5bcb98eaf492b467df815c909b904814c9776"));
+        assert(block.hashMerkleRoot == uint256("0x"));
         if (true && block.GetHash() != hashGenesisBlock)
         {
             printf("Searching for genesis block...\n");
@@ -3186,7 +3186,7 @@ bool static AlreadyHave(const CInv& inv)
 // The message start string is designed to be unlikely to occur in normal data.
 // The characters are rarely used upper ASCII, not valid as UTF-8, and produce
 // a large 4-byte int at any alignment.
-unsigned char pchMessageStart[4] = { 0xb3, 0xa1, 0xd1, 0xbd }; // Swiscoin: increase each by adding 2 to bitcoin's value.
+unsigned char pchMessageStart[4] = { 0xb3, 0xa1, 0xd1, 0xbd }; // Levelcoin: increase each by adding 2 to bitcoin's value.
 
 
 void static ProcessGetData(CNode* pfrom)
@@ -4236,7 +4236,7 @@ bool SendMessages(CNode* pto, bool fSendTrickle)
 
 //////////////////////////////////////////////////////////////////////////////
 //
-// SwiscoinMiner
+// LevelcoinMiner
 //
 
 int static FormatHashBlocks(void* pbuffer, unsigned int len)
@@ -4649,7 +4649,7 @@ bool CheckWork(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
         return false;
 
     //// debug print
-    printf("SwiscoinMiner:\n");
+    printf("LevelcoinMiner:\n");
     printf("proof-of-work found  \n  hash: %s  \ntarget: %s\n", hash.GetHex().c_str(), hashTarget.GetHex().c_str());
     pblock->print();
     printf("generated %s\n", FormatMoney(pblock->vtx[0].vout[0].nValue).c_str());
@@ -4658,7 +4658,7 @@ bool CheckWork(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
     {
         LOCK(cs_main);
         if (pblock->hashPrevBlock != hashBestChain)
-            return error("SwiscoinMiner : generated block is stale");
+            return error("LevelcoinMiner : generated block is stale");
 
         // Remove key from key pool
         reservekey.KeepKey();
@@ -4672,17 +4672,17 @@ bool CheckWork(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
         // Process this block the same as if we had received it from another node
         CValidationState state;
         if (!ProcessBlock(state, NULL, pblock))
-            return error("SwiscoinMiner : ProcessBlock, block not accepted");
+            return error("LevelcoinMiner : ProcessBlock, block not accepted");
     }
 
     return true;
 }
 
-void static SwiscoinMiner(CWallet *pwallet)
+void static LevelcoinMiner(CWallet *pwallet)
 {
-    printf("SwiscoinMiner started\n");
+    printf("LevelcoinMiner started\n");
     SetThreadPriority(THREAD_PRIORITY_LOWEST);
-    RenameThread("swiscoin-miner");
+    RenameThread("levelcoin-miner");
 
     // Each thread has its own key and counter
     CReserveKey reservekey(pwallet);
@@ -4704,7 +4704,7 @@ void static SwiscoinMiner(CWallet *pwallet)
         CBlock *pblock = &pblocktemplate->block;
         IncrementExtraNonce(pblock, pindexPrev, nExtraNonce);
 
-        printf("Running SwiscoinMiner with %"PRIszu" transactions in block (%u bytes)\n", pblock->vtx.size(),
+        printf("Running LevelcoinMiner with %"PRIszu" transactions in block (%u bytes)\n", pblock->vtx.size(),
                ::GetSerializeSize(*pblock, SER_NETWORK, PROTOCOL_VERSION));
 
         //
@@ -4803,7 +4803,7 @@ void static SwiscoinMiner(CWallet *pwallet)
     } }
     catch (boost::thread_interrupted)
     {
-        printf("SwiscoinMiner terminated\n");
+        printf("LevelcoinMiner terminated\n");
         throw;
     }
 }
@@ -4828,7 +4828,7 @@ void GenerateBitcoins(bool fGenerate, CWallet* pwallet)
 
     minerThreads = new boost::thread_group();
     for (int i = 0; i < nThreads; i++)
-        minerThreads->create_thread(boost::bind(&SwiscoinMiner, pwallet));
+        minerThreads->create_thread(boost::bind(&LevelcoinMiner, pwallet));
 }
 
 // Amount compression:

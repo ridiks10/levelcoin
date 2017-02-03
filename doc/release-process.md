@@ -24,7 +24,7 @@ Release Process
 
 ##perform gitian builds
 
- From a directory containing the swiscoin source, gitian-builder and gitian.sigs
+ From a directory containing the levelcoin source, gitian-builder and gitian.sigs
   
 	export SIGNER=(your gitian key, ie bluematt, sipa, etc)
 	export VERSION=0.8.7
@@ -42,62 +42,62 @@ Release Process
 	wget 'http://downloads.sourceforge.net/project/boost/boost/1.55.0/boost_1_55_0.tar.bz2'
 	wget 'http://download.qt-project.org/official_releases/qt/4.8/4.8.5/qt-everywhere-opensource-src-4.8.5.tar.gz'
 	cd ..
-	./bin/gbuild ../swiscoin/contrib/gitian-descriptors/boost-win32.yml
+	./bin/gbuild ../levelcoin/contrib/gitian-descriptors/boost-win32.yml
 	mv build/out/boost-*.zip inputs/
-	./bin/gbuild ../swiscoin/contrib/gitian-descriptors/deps-win32.yml
+	./bin/gbuild ../levelcoin/contrib/gitian-descriptors/deps-win32.yml
 	mv build/out/bitcoin*.zip inputs/
-	./bin/gbuild ../swiscoin/contrib/gitian-descriptors/qt-win32.yml
+	./bin/gbuild ../levelcoin/contrib/gitian-descriptors/qt-win32.yml
 	mv build/out/qt*.zip inputs/
 
- Build swiscoind and swiscoin-qt on Linux32, Linux64, and Win32:
+ Build levelcoind and levelcoin-qt on Linux32, Linux64, and Win32:
   
-	./bin/gbuild --commit swiscoin=v${VERSION} ../swiscoin/contrib/gitian-descriptors/gitian.yml
-	./bin/gsign --signer $SIGNER --release ${VERSION} --destination ../gitian.sigs/ ../swiscoin/contrib/gitian-descriptors/gitian.yml
+	./bin/gbuild --commit levelcoin=v${VERSION} ../levelcoin/contrib/gitian-descriptors/gitian.yml
+	./bin/gsign --signer $SIGNER --release ${VERSION} --destination ../gitian.sigs/ ../levelcoin/contrib/gitian-descriptors/gitian.yml
 	pushd build/out
-	zip -r swiscoin-${VERSION}-linux.zip *
-	mv swiscoin-${VERSION}-linux.zip ../../
+	zip -r levelcoin-${VERSION}-linux.zip *
+	mv levelcoin-${VERSION}-linux.zip ../../
 	popd
-	./bin/gbuild --commit swiscoin=v${VERSION} ../swiscoin/contrib/gitian-descriptors/gitian-win32.yml
-	./bin/gsign --signer $SIGNER --release ${VERSION}-win32 --destination ../gitian.sigs/ ../swiscoin/contrib/gitian-descriptors/gitian-win32.yml
+	./bin/gbuild --commit levelcoin=v${VERSION} ../levelcoin/contrib/gitian-descriptors/gitian-win32.yml
+	./bin/gsign --signer $SIGNER --release ${VERSION}-win32 --destination ../gitian.sigs/ ../levelcoin/contrib/gitian-descriptors/gitian-win32.yml
 	pushd build/out
-	zip -r swiscoin-${VERSION}-win32.zip *
-	mv swiscoin-${VERSION}-win32.zip ../../
+	zip -r levelcoin-${VERSION}-win32.zip *
+	mv levelcoin-${VERSION}-win32.zip ../../
 	popd
 
   Build output expected:
 
-  1. linux 32-bit and 64-bit binaries + source (swiscoin-${VERSION}-linux-gitian.zip)
-  2. windows 32-bit binary, installer + source (swiscoin-${VERSION}-win32-gitian.zip)
+  1. linux 32-bit and 64-bit binaries + source (levelcoin-${VERSION}-linux-gitian.zip)
+  2. windows 32-bit binary, installer + source (levelcoin-${VERSION}-win32-gitian.zip)
   3. Gitian signatures (in gitian.sigs/${VERSION}[-win32]/(your gitian key)/
 
 repackage gitian builds for release as stand-alone zip/tar/installer exe
 
 **Linux .tar.gz:**
 
-	unzip swiscoin-${VERSION}-linux-gitian.zip -d swiscoin-${VERSION}-linux
-	tar czvf swiscoin-${VERSION}-linux.tar.gz swiscoin-${VERSION}-linux
-	rm -rf swiscoin-${VERSION}-linux
+	unzip levelcoin-${VERSION}-linux-gitian.zip -d levelcoin-${VERSION}-linux
+	tar czvf levelcoin-${VERSION}-linux.tar.gz levelcoin-${VERSION}-linux
+	rm -rf levelcoin-${VERSION}-linux
 
 **Windows .zip and setup.exe:**
 
-	unzip swiscoin-${VERSION}-win32-gitian.zip -d swiscoin-${VERSION}-win32
-	mv swiscoin-${VERSION}-win32/swiscoin-*-setup.exe .
-	zip -r swiscoin-${VERSION}-win32.zip bitcoin-${VERSION}-win32
-	rm -rf swiscoin-${VERSION}-win32
+	unzip levelcoin-${VERSION}-win32-gitian.zip -d levelcoin-${VERSION}-win32
+	mv levelcoin-${VERSION}-win32/levelcoin-*-setup.exe .
+	zip -r levelcoin-${VERSION}-win32.zip bitcoin-${VERSION}-win32
+	rm -rf levelcoin-${VERSION}-win32
 
 **Perform Mac build:**
 
   OSX binaries are created on a dedicated 32-bit, OSX 10.6.8 machine.
-  Swiscoin 0.8.x is built with MacPorts.  0.9.x will be Homebrew only.
+  Levelcoin 0.8.x is built with MacPorts.  0.9.x will be Homebrew only.
 
 	qmake RELEASE=1 USE_UPNP=1 USE_QRCODE=1
 	make
 	export QTDIR=/opt/local/share/qt4  # needed to find translations/qt_*.qm files
 	T=$(contrib/qt_translations.py $QTDIR/translations src/qt/locale)
 	python2.7 share/qt/clean_mac_info_plist.py
-	python2.7 contrib/macdeploy/macdeployqtplus Swiscoin-Qt.app -add-qt-tr $T -dmg -fancy contrib/macdeploy/fancy.plist
+	python2.7 contrib/macdeploy/macdeployqtplus Levelcoin-Qt.app -add-qt-tr $T -dmg -fancy contrib/macdeploy/fancy.plist
 
- Build output expected: Swiscoin-Qt.dmg
+ Build output expected: Levelcoin-Qt.dmg
 
 ###Next steps:
 

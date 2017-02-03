@@ -3,7 +3,7 @@
 <plist version="0.9">
 <dict>
 	<key>CFBundleIconFile</key>
-	<string>swiscoin.icns</string>
+	<string>levelcoin.icns</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleGetInfoString</key>
@@ -15,19 +15,19 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleExecutable</key>
-	<string>Swiscoin-Qt</string>
+	<string>Levelcoin-Qt</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.swiscoin.Swiscoin-Qt</string>
+	<string>org.levelcoin.Levelcoin-Qt</string>
         <key>CFBundleURLTypes</key>
         <array>
           <dict>
             <key>CFBundleTypeRole</key>
             <string>Editor</string>
             <key>CFBundleURLName</key>
-            <string>org.swiscoin.SwiscoinPayment</string>
+            <string>org.levelcoin.LevelcoinPayment</string>
             <key>CFBundleURLSchemes</key>
             <array>
-              <string>swiscoin</string>
+              <string>levelcoin</string>
             </array>
           </dict>
         </array>

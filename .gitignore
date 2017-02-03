@@ -1,7 +1,7 @@
 src/*.exe
-src/swiscoin
-src/swiscoind
-src/test_swiscoin
+src/levelcoin
+src/levelcoind
+src/test_levelcoin
 .*.swp
 *.*~*
 *.bak
@@ -9,17 +9,17 @@ src/test_swiscoin
 *.orig
 *.o
 *.patch
-.swiscoin
+.levelcoin
 
 # Compilation and Qt preprocessor part
 *.qm
 Makefile
-swiscoin-qt
-Swiscoin-Qt.app
+levelcoin-qt
+Levelcoin-Qt.app
 
 # Unit-tests
 Makefile.test
-swiscoin-qt_test
+levelcoin-qt_test
 
 # Resources cpp
 qrc_*.cpp

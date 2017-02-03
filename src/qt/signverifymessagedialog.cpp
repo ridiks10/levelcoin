@@ -28,11 +28,11 @@ SignVerifyMessageDialog::SignVerifyMessageDialog(QWidget *parent) :
 
 #if (QT_VERSION >= 0x040700)
     /* Do not move this to the XML file, Qt before 4.7 will choke on it */
-    ui->addressIn_SM->setPlaceholderText(tr("Enter a Swiscoin address (e.g. Sc32qcrCnU1nQwNHCwFGtzDaTJh32tMe67)"));
+    ui->addressIn_SM->setPlaceholderText(tr("Enter a Levelcoin address (e.g. Sc32qcrCnU1nQwNHCwFGtzDaTJh32tMe67)"));
     ui->signatureOut_SM->setPlaceholderText(tr("Click \"Sign Message\" to generate signature"));
 
-    ui->addressIn_VM->setPlaceholderText(tr("Enter a Swiscoin address (e.g. Sc32qcrCnU1nQwNHCwFGtzDaTJh32tMe67)"));
-    ui->signatureIn_VM->setPlaceholderText(tr("Enter Swiscoin signature"));
+    ui->addressIn_VM->setPlaceholderText(tr("Enter a Levelcoin address (e.g. Sc32qcrCnU1nQwNHCwFGtzDaTJh32tMe67)"));
+    ui->signatureIn_VM->setPlaceholderText(tr("Enter Levelcoin signature"));
 #endif
 
     GUIUtil::setupAddressWidget(ui->addressIn_SM, this);
